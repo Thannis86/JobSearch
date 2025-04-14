@@ -1,10 +1,16 @@
 "use client";
 
+import * as React from "react";
 import { Button, Card, Table, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import "./AllJobsCard.css";
 import { useEffect, useState } from "react";
 import FetchJobs from "./AllJobsFetch";
+import handleChange from "./HandleChange";
+import JobSelect from "./JobSelect";
+import { Select } from "radix-ui";
+
+import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 export default function AllJobsCard() {
   const [search, setSearch] = useState("");
@@ -33,6 +39,8 @@ export default function AllJobsCard() {
       return false;
     }
   }
+
+  const Select = () => JobSelect;
 
   return (
     <Card>
@@ -82,8 +90,12 @@ export default function AllJobsCard() {
                 }).format(job.salary)}
               </Table.Cell>
               <Table.Cell>
-                <form>
-                  <select name="stage" onchange="this.form.submit()">
+                {/* <form>
+                  <select
+                    defaultValue={job.stage}
+                    name="stage"
+                    onChange={handleChange}
+                  >
                     <option value={job.stage}>{job.stage}</option>
                     <option value="Applied">Applied</option>
                     <option value="Callback">Callback</option>
@@ -92,7 +104,8 @@ export default function AllJobsCard() {
                     <option value="Rejected">Rejected</option>
                   </select>
                   <input type="hidden" name="id" value={job.id}></input>
-                </form>
+                </form> */}
+                <JobSelect job={job} />
               </Table.Cell>
             </Table.Row>
           ))}
