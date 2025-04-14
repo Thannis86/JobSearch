@@ -2,12 +2,10 @@
 
 import { db } from "@/utils/dbConnection";
 
-export default function StageSubmit(formvalues) {
-  const stage = formvalues.get("stage");
-  const id = formvalues.get("id");
+export default async function StageSubmit(id, status) {
   db.query(
     `UPDATE posts SET stage = $1
     WHERE id = $2`,
-    [stage, id]
+    [status, id]
   );
 }
