@@ -1,3 +1,42 @@
-.AllJobsCardHeader {
-  /* display: flex; */
+.SearchBar {
+  border: 2px black solid;
+  background-color: #6f6d78;
+  color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25%;
+}
+
+.SearchBar::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+.SearchBar:hover {
+  background-color: #82808a;
+}
+
+.UnusedButton {
+  background-color: transparent;
+}
+
+.Rejected {
+  background-color: #532525;
+}
+
+.Ignored {
+  background-color: #532525;
+}
+
+.Interview {
+  background-color: #1b6357;
+}
+
+.Callback {
+  background-color: #2a2f77;
+}
+
+.Offer {
+  background-color: #16361d;
 }
