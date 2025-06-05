@@ -1,16 +1,15 @@
 "use client";
 
 import * as React from "react";
-import { Button, Card, Table, Text } from "@radix-ui/themes";
+import { Button, Card, Table, Text, TextField } from "@radix-ui/themes";
 import Link from "next/link";
 import "./AllJobsCard.css";
 import { useEffect, useState } from "react";
 import FetchJobs from "./AllJobsFetch";
-import handleChange from "./HandleChange";
 import JobSelect from "./JobSelect";
-import { Select } from "radix-ui";
 
-import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import RejectedSwitch from "./Switch";
 
 export default function AllJobsCard() {
   const [search, setSearch] = useState("");
@@ -40,24 +39,28 @@ export default function AllJobsCard() {
     }
   }
 
-  const Select = () => JobSelect;
-
   return (
     <Card>
-      <input
-        type="text"
-        placeholder="Search Job..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
       <Table.Root>
+        <Table.Header>
+          <RejectedSwitch />
+        </Table.Header>
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell className="AllJobsCardHeader">
               Company
             </Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell className="AllJobsCardHeader">
-              Job Title
+              <TextField.Root
+                type="text"
+                placeholder="Job Title"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              >
+                <TextField.Slot>
+                  <MagnifyingGlassIcon />
+                </TextField.Slot>
+              </TextField.Root>
             </Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell className="AllJobsCardHeader">
               Salary
@@ -67,10 +70,9 @@ export default function AllJobsCard() {
             </Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
-        <Table.Header></Table.Header>
         <Table.Body>
           {filteredJobs.map((job) => (
-            <Table.Row key={job.id}>
+            <Table.Row key={job.id} className={job.stage}>
               <Table.Cell>{job.company}</Table.Cell>
               <Table.Cell>
                 {isValidURL(job.link) ? (
@@ -80,7 +82,7 @@ export default function AllJobsCard() {
                     </Link>
                   </Button>
                 ) : (
-                  <Text>{job.job_title}</Text>
+                  <Button className="UnusedButton">{job.job_title}</Button>
                 )}
               </Table.Cell>
               <Table.Cell>
@@ -90,21 +92,6 @@ export default function AllJobsCard() {
                 }).format(job.salary)}
               </Table.Cell>
               <Table.Cell>
-                {/* <form>
-                  <select
-                    defaultValue={job.stage}
-                    name="stage"
-                    onChange={handleChange}
-                  >
-                    <option value={job.stage}>{job.stage}</option>
-                    <option value="Applied">Applied</option>
-                    <option value="Callback">Callback</option>
-                    <option value="Interview">Interview</option>
-                    <option value="Accepted">Accepted</option>
-                    <option value="Rejected">Rejected</option>
-                  </select>
-                  <input type="hidden" name="id" value={job.id}></input>
-                </form> */}
                 <JobSelect job={job} />
               </Table.Cell>
             </Table.Row>

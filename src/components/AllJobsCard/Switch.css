@@ -1,0 +1,31 @@
+.SwitchRoot {
+  all: unset;
+  width: 42px;
+  height: 25px;
+  background-color: gray;
+  border-radius: 9999px;
+  position: relative;
+  transition: background-color 0.2s ease;
+  margin-right: 5%;
+}
+.SwitchRoot[data-state="checked"] {
+  background-color: #4ade80;
+}
+.SwitchThumb {
+  display: block;
+  width: 21px;
+  height: 21px;
+  background-color: white;
+  border-radius: 9999px;
+  transition: transform 0.2s ease;
+  transform: translateX(2px);
+  will-change: transform;
+}
+.SwitchRoot[data-state="checked"] .SwitchThumb {
+  transform: translateX(19px);
+}
+
+#Switch {
+  display: flex;
+  align-items: center;
+}

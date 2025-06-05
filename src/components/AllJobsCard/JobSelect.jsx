@@ -28,8 +28,8 @@ export default function JobSelect({ job }) {
               <SelectItem value="Callback">Callback</SelectItem>
               <SelectItem value="Ignored">Ignored</SelectItem>
               <SelectItem value="Interview">Interview</SelectItem>
-              <SelectItem value="Accepted">Accepted</SelectItem>
-              <SelectItem value="Rejected">Rejected {job.id}</SelectItem>
+              <SelectItem value="Offer">Offer</SelectItem>
+              <SelectItem value="Rejected">Rejected</SelectItem>
               <input type="hidden" name="id" value={job.id}></input>
             </Select.Group>
           </Select.Viewport>
